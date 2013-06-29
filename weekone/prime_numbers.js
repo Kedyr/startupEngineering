@@ -1,4 +1,5 @@
-module.exports = {
+var Primes = {
+    fs:require('fs'),
     getPrimes:function(num_of_primes)
     {
         var primes = [2];
@@ -30,11 +31,10 @@ module.exports = {
         }
         return true;
     },
-    isInt:function(mixed_var) 
-    {
+    isInt:function(mixed_var){
         return mixed_var === +mixed_var && isFinite(mixed_var) && !(mixed_var % 1);
     },
-    printPrimes:function(num_of_primes)
+    primes:function(num_of_primes)
     { 
         var primes = this.getPrimes(num_of_primes);
         var prime_str = "";
@@ -45,5 +45,21 @@ module.exports = {
                 prime_str += ",";
         }
         return prime_str;
+    },
+    writeToFile:function(filePath,data){
+	this.fs.writeFileSync(filePath,data);
+    },
+    printPrimes:function(num_primes,filepath,printer)
+    {
+        var stringData = this.primes(num_primes);
+  	printer(stringData);
     }
 }
+
+var num_primes_to_print = 100; 
+var filepath = "./prime_numbers.txt";
+var num_primes_to_print = 100; 
+
+Primes.printPrimes(num_primes_to_print,filepath,function(data){
+   Primes.writeToFile(filepath,data);
+});
