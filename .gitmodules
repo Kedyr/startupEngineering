@@ -1,0 +1,3 @@
+[submodule "weekthree/bitstarter"]
+	path = weekthree/bitstarter
+	url = git@heroku.com:radiant-bitstarter.git
